@@ -1,51 +1,77 @@
 package playground.graphs.graph;
 
-import javax.naming.OperationNotSupportedException;
 import java.util.*;
 
 @SuppressWarnings("unchecked")
 public class DirectedGraph<V> extends AbstractGraph<V> {
-  private final Map<V, Set<V>> adjacentMap = new LinkedHashMap<V, Set<V>>();
+  private final Map<V, Set<V>> outgoing = new LinkedHashMap<V, Set<V>>();
+  private final Map<V, Set<V>> incoming = new LinkedHashMap<V, Set<V>>();
 
   @Override
-  public boolean addEdge(V source, V target) throws OperationNotSupportedException {
+  public boolean addEdge(V source, V target) {
     if (!this.containsVertex(source) || !this.containsVertex(target)) {
-      throw new OperationNotSupportedException("vertex cannot be found in the graph");
+      throw VertexNotFoundException;
     }
-    Set<V> neighbours = adjacentMap.get(source);
-    if (neighbours == null) {
-      neighbours = new LinkedHashSet<V>();
-      adjacentMap.put(source, neighbours);
+    Set<V> outgoingNeighbours = outgoing.get(source);
+    if (outgoingNeighbours == null) {
+      outgoingNeighbours = new LinkedHashSet<V>();
+      outgoing.put(source, outgoingNeighbours);
     }
-    return neighbours.add(target);
+    Set<V> incomingNeighbours = incoming.get(target);
+    if (incomingNeighbours == null) {
+      incomingNeighbours = new LinkedHashSet<V>();
+      incoming.put(target, incomingNeighbours);
+    }
+    return outgoingNeighbours.add(target) && incomingNeighbours.add(source);
   }
 
   @Override
-  public boolean containsEdge(V source, V target) throws OperationNotSupportedException {
+  public boolean containsEdge(V source, V target) {
     if (!this.containsVertex(source) || !this.containsVertex(target)) {
-      throw new OperationNotSupportedException("vertex cannot be found in the graph");
+      throw VertexNotFoundException;
     }
-    Set<V> neighbours = adjacentMap.get(source);
+    Set<V> neighbours = outgoing.get(source);
     return neighbours != null && neighbours.contains(target);
   }
 
   @Override
-  public boolean deleteEdge(V source, V target) throws OperationNotSupportedException {
-    if (!this.containsVertex(source) || !this.containsVertex(target)) {
-      throw new OperationNotSupportedException("vertex cannot be found in the graph");
+  public boolean deleteEdge(V source, V target) {
+    if (containsEdge(source, target)) {
+      outgoing.get(source).remove(target);
+      incoming.get(target).remove(source);
+      return true;
     }
-    Set<V> neighbours = adjacentMap.get(source);
-    return neighbours != null && neighbours.remove(target);
+    return false;
   }
 
   @Override
   public void clearEdges() {
-    adjacentMap.clear();
+    outgoing.clear();
+    incoming.clear();
   }
 
   @Override
   public Iterable<V> getNeighbours(V vertex) {
-    Set<V> neighbours = adjacentMap.get(vertex);
+    if (!this.containsVertex(vertex)) {
+      throw VertexNotFoundException;
+    }
+    Set<V> neighbours = outgoing.get(vertex);
     return neighbours == null ? Collections.EMPTY_SET : Collections.unmodifiableCollection(neighbours);
+  }
+
+  @Override
+  void deleteAssociatedEdges(V vertex) {
+    if (incoming.containsKey(vertex)) {
+      for (V inNeighbour : incoming.get(vertex)) {
+        outgoing.get(inNeighbour).remove(vertex);
+      }
+      incoming.get(vertex).clear();
+    }
+    if (outgoing.containsKey(vertex)) {
+      for (V outNeighbour : outgoing.get(vertex)) {
+        incoming.get(outNeighbour).remove(vertex);
+      }
+      outgoing.get(vertex).clear();
+    }
   }
 }

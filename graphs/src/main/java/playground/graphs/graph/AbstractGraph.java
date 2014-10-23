@@ -1,28 +1,38 @@
 package playground.graphs.graph;
 
-import javax.naming.OperationNotSupportedException;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 public abstract class AbstractGraph<V> implements Graph<V> {
+  public static final UnsupportedOperationException VertexNotFoundException =
+      new UnsupportedOperationException("vertex can not be found in the graph");
+  private static final UnsupportedOperationException VertexISNullException =
+      new UnsupportedOperationException("vertex can not be null");
   private final Set<V> vertices = new LinkedHashSet<V>();
 
   @Override
-  public boolean addVertex(V vertex) throws OperationNotSupportedException {
-    if (vertex == null)
-      throw new OperationNotSupportedException("vertex can not be null");
+  public boolean addVertex(V vertex) {
+    if (vertex == null) {
+      throw VertexISNullException;
+    }
     return vertices.add(vertex);
   }
 
   @Override
   public boolean containsVertex(V vertex) {
+    if (vertex == null)
+      throw VertexISNullException;
     return vertices.contains(vertex);
   }
 
+  abstract void deleteAssociatedEdges(V vertex);
+
   @Override
   public boolean deleteVertex(V vertex) {
-    //TODO: delete edges from/into vertex
+    if (containsVertex(vertex)) {
+      deleteAssociatedEdges(vertex);
+    }
     return vertices.remove(vertex);
   }
 

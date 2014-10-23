@@ -1,19 +1,17 @@
 package playground.graphs.graph;
 
-import javax.naming.OperationNotSupportedException;
-
 interface Graph<V> {
-  public boolean addVertex(V vertex) throws OperationNotSupportedException;
+  public boolean addVertex(V vertex);
 
   public boolean containsVertex(V vertex);
 
   public boolean deleteVertex(V vertex);
 
-  public boolean addEdge(V source, V target) throws OperationNotSupportedException;
+  public boolean addEdge(V source, V target);
 
-  public boolean containsEdge(V source, V target) throws OperationNotSupportedException;
+  public boolean containsEdge(V source, V target);
 
-  public boolean deleteEdge(V source, V target) throws OperationNotSupportedException;
+  public boolean deleteEdge(V source, V target);
 
   public void clearEdges();
 
