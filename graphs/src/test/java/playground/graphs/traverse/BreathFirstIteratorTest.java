@@ -3,13 +3,13 @@ package playground.graphs.traverse;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import playground.graphs.graph.DirectedGraph;
+import playground.graphs.graph.DirectedGraphImpl;
 
 import java.util.Iterator;
 
 public class BreathFirstIteratorTest {
   private final String v[] = new String[10];
-  private final DirectedGraph<String> graph = new DirectedGraph<String>();
+  private final DirectedGraphImpl<String> graph = new DirectedGraphImpl<String>();
 
   @BeforeClass
   public void init() {

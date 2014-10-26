@@ -1,6 +1,15 @@
 package playground.graphs.graph;
 
 interface Graph<V> {
+  static final UnsupportedOperationException VertexNotFoundException =
+      new UnsupportedOperationException("vertex can not be found in the graph");
+  static final UnsupportedOperationException VertexISNullException =
+      new UnsupportedOperationException("vertex can not be null");
+  static final UnsupportedOperationException CannotModifyThroughResidualGraph = new UnsupportedOperationException("Cannot modify through residual graph");
+  static final UnsupportedOperationException EdgeNotFoundException = new UnsupportedOperationException("Edge cannot be found");
+  static final UnsupportedOperationException WeightNotFoundException = new UnsupportedOperationException("Weight cannot be found");
+
+
   public boolean addVertex(V vertex);
 
   public boolean containsVertex(V vertex);

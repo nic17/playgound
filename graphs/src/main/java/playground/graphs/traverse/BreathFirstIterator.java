@@ -1,7 +1,7 @@
 package playground.graphs.traverse;
 
 import playground.graphs.graph.AbstractGraph;
-import playground.graphs.graph.DirectedGraph;
+import playground.graphs.graph.DirectedGraphImpl;
 
 import java.util.*;
 
@@ -9,11 +9,11 @@ public class BreathFirstIterator<V> implements Iterator<V> {
   private static final UnsupportedOperationException RemoveNotSupportedException =
       new UnsupportedOperationException("remove is not supported in GraphIterator");
 
-  private final DirectedGraph<V> graph;
+  private final DirectedGraphImpl<V> graph;
   private final Queue<V> que = new ArrayDeque<V>();
   private final Set<V> inQueue = new HashSet<V>();
 
-  public BreathFirstIterator(DirectedGraph<V> graph, V root) {
+  public BreathFirstIterator(DirectedGraphImpl<V> graph, V root) {
     this.graph = graph;
     if (graph.containsVertex(root)) {
       que.add(root);

@@ -5,10 +5,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public abstract class AbstractGraph<V> implements Graph<V> {
-  public static final UnsupportedOperationException VertexNotFoundException =
-      new UnsupportedOperationException("vertex can not be found in the graph");
-  private static final UnsupportedOperationException VertexISNullException =
-      new UnsupportedOperationException("vertex can not be null");
   private final Set<V> vertices = new LinkedHashSet<V>();
 
   @Override
