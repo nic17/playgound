@@ -67,4 +67,29 @@ public class EdmondsKarpMaxFlowTest {
 
     Assert.assertEquals(maxFlow.getFlow(v[6], v[7]), 1);
   }
+
+  @Test
+  public void testBackwardEdge() throws Exception {
+    String s = "source", v1 = "v1", v2 = "v2", v3 = "v3", v4 = "v4", v5 = "v5", t = "sink";
+    WeightedDirectedGraphImpl<String> myGraph = new WeightedDirectedGraphImpl<String>(new DirectedGraphImpl<String>());
+    myGraph.addVertex(s);
+    myGraph.addVertex(v1);
+    myGraph.addVertex(v2);
+    myGraph.addVertex(v3);
+    myGraph.addVertex(v4);
+    myGraph.addVertex(v5);
+    myGraph.addVertex(t);
+    myGraph.addEdgeWithWeight(s, v1, 10).addEdgeWithWeight(s, v2, 1).addEdgeWithWeight(s, v3, 1);
+    myGraph.addEdgeWithWeight(v1, v3, 6).addEdgeWithWeight(v1, v4, 5);
+    myGraph.addEdgeWithWeight(v2, v4, 1);
+    myGraph.addEdgeWithWeight(v3, v5, 7);
+    myGraph.addEdgeWithWeight(v4, t, 5);
+    myGraph.addEdgeWithWeight(v5, t, 7);
+
+    EdmondsKarpMaxFlow<String> maxFlow = new EdmondsKarpMaxFlow<String>(myGraph, s, t);
+    Assert.assertEquals(maxFlow.getMaxFlow(), 12);
+    Assert.assertEquals(maxFlow.getFlow(s, v1), 10);
+    Assert.assertEquals(maxFlow.getFlow(s, v2), 1);
+    Assert.assertEquals(maxFlow.getFlow(s, v3), 1);
+  }
 }

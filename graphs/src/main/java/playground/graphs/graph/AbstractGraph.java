@@ -8,7 +8,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
   private final Set<V> vertices = new LinkedHashSet<V>();
 
   @Override
-  public boolean addVertex(V vertex) {
+  public final boolean addVertex(V vertex) {
     if (vertex == null) {
       throw VertexISNullException;
     }
@@ -16,7 +16,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
   }
 
   @Override
-  public boolean containsVertex(V vertex) {
+  public final boolean containsVertex(V vertex) {
     if (vertex == null)
       throw VertexISNullException;
     return vertices.contains(vertex);
@@ -25,7 +25,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
   abstract void deleteAssociatedEdges(V vertex);
 
   @Override
-  public boolean deleteVertex(V vertex) {
+  public final boolean deleteVertex(V vertex) {
     if (containsVertex(vertex)) {
       deleteAssociatedEdges(vertex);
     }
@@ -33,18 +33,18 @@ public abstract class AbstractGraph<V> implements Graph<V> {
   }
 
   @Override
-  public void clearVertex() {
+  public final void clearVertex() {
     vertices.clear();
   }
 
   @Override
-  public void clearAll() {
+  public final void clearAll() {
     clearVertex();
     clearEdges();
   }
 
   @Override
-  public Iterable<V> getVertices() {
+  public final Iterable<V> getVertices() {
     return Collections.unmodifiableCollection(vertices);
   }
 

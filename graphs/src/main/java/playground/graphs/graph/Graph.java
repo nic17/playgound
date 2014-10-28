@@ -6,6 +6,7 @@ interface Graph<V> {
   static final UnsupportedOperationException VertexISNullException =
       new UnsupportedOperationException("vertex can not be null");
   static final UnsupportedOperationException CannotModifyThroughResidualGraph = new UnsupportedOperationException("Cannot modify through residual graph");
+  static final UnsupportedOperationException UnsupportedThroughResidualGraph = new UnsupportedOperationException("Cannot perform this operation through residual graph");
   static final UnsupportedOperationException EdgeNotFoundException = new UnsupportedOperationException("Edge cannot be found");
   static final UnsupportedOperationException WeightNotFoundException = new UnsupportedOperationException("Weight cannot be found");
 
