@@ -11,20 +11,20 @@ import java.util.Queue;
 public class EdmondsKarpMaxFlow<V> {
   private final ResidualWeightedDirectedGraph<V> graph;
   private final V source, sink;
-  private final Map<V, V> predecessor = new HashMap<V, V>();
-  private final Map<V, Integer> maxFlow = new HashMap<V, Integer>();
+  private final Map<V, V> predecessor = new HashMap<>();
+  private final Map<V, Integer> maxFlow = new HashMap<>();
   private int currMaxFlow = 0;
 
 
   public EdmondsKarpMaxFlow(WeightedDirectedGraph<V> graph, V source, V sink) {
-    this.graph = new ResidualWeightedDirectedGraph<V>(graph);
+    this.graph = new ResidualWeightedDirectedGraph<>(graph);
     this.source = source;
     this.sink = sink;
     computeMaxFlow();
   }
 
   private void computeMaxFlow() {
-    Queue<V> que = new ArrayDeque<V>();
+    Queue<V> que = new ArrayDeque<>();
     while (true) {
       breathFirstSearch(que);
       if (maxFlow.get(sink) == 0) {

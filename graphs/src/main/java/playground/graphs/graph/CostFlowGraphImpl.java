@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class CostFlowGraphImpl<V> implements CostFlowGraph<V> {
   private final DirectedGraph<V> graph;
-  private final Map<V, Map<V, Integer>> capacities = new HashMap<V, Map<V, Integer>>();
-  private final Map<V, Map<V, Integer>> costs = new HashMap<V, Map<V, Integer>>();
+  private final Map<V, Map<V, Integer>> capacities = new HashMap<>();
+  private final Map<V, Map<V, Integer>> costs = new HashMap<>();
   private AsWeight weightOpt = AsWeight.USE_CAPACITY_AS_WEIGHT;
 
   public CostFlowGraphImpl(DirectedGraph<V> graph) {
@@ -37,7 +37,7 @@ public class CostFlowGraphImpl<V> implements CostFlowGraph<V> {
   private void setCost(V source, V target, int cost) {
     Map<V, Integer> map = costs.get(source);
     if (map == null) {
-      map = new HashMap<V, Integer>();
+      map = new HashMap<>();
       costs.put(source, map);
     }
     map.put(target, cost);
@@ -46,7 +46,7 @@ public class CostFlowGraphImpl<V> implements CostFlowGraph<V> {
   private void setCapacity(V source, V target, int capacity) {
     Map<V, Integer> map = capacities.get(source);
     if (map == null) {
-      map = new HashMap<V, Integer>();
+      map = new HashMap<>();
       capacities.put(source, map);
     }
     map.put(target, capacity);

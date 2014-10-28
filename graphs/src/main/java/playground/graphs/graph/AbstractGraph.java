@@ -5,7 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public abstract class AbstractGraph<V> implements Graph<V> {
-  private final Set<V> vertices = new LinkedHashSet<V>();
+  private final Set<V> vertices = new LinkedHashSet<>();
 
   @Override
   public final boolean addVertex(V vertex) {

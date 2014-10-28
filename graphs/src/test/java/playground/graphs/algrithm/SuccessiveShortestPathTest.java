@@ -16,8 +16,8 @@ public class SuccessiveShortestPathTest {
 
   @BeforeClass
   public void init() {
-    CostFlowGraphImpl<String> cfGraph = new CostFlowGraphImpl<String>();
-    List<Integer> eightInt = new ArrayList<Integer>();
+    CostFlowGraphImpl<String> cfGraph = new CostFlowGraphImpl<>();
+    List<Integer> eightInt = new ArrayList<>();
     for (int i = 0; i < 7; i++) {
       eightInt.add(i);
     }
@@ -34,7 +34,7 @@ public class SuccessiveShortestPathTest {
     cfGraph.addEdgeWithCapacityCost(v[3], v[4], 3, -3).addEdgeWithCapacityCost(v[3], v[5], 2, 4);
     cfGraph.addEdgeWithCapacityCost(v[4], v[6], 3, 0);
     cfGraph.addEdgeWithCapacityCost(v[5], v[6], 2, 0);
-    ssp = new SuccessiveShortestPath<String>(cfGraph, v[0], v[6]);
+    ssp = new SuccessiveShortestPath<>(cfGraph, v[0], v[6]);
   }
 
   @Test
@@ -62,11 +62,11 @@ public class SuccessiveShortestPathTest {
 
   @Test(timeOut = 400)
   public void testPerformance() throws Exception {
-    CostFlowGraphImpl<String> cfGraph = new CostFlowGraphImpl<String>();
+    CostFlowGraphImpl<String> cfGraph = new CostFlowGraphImpl<>();
     String source = "source", sink = "sink";
     cfGraph.addVertex(source);
     cfGraph.addVertex(sink);
-    List<String> machines = new ArrayList<String>(), layouts = new ArrayList<String>();
+    List<String> machines = new ArrayList<>(), layouts = new ArrayList<>();
     for (int i = 0; i < 100; i++) {
       machines.add("machine" + i);
     }
@@ -95,6 +95,6 @@ public class SuccessiveShortestPathTest {
         cfGraph.addEdgeWithCapacityCost(machine, layout, 10, random.nextInt(11) + 10);
       }
     }
-    Assert.assertTrue(new SuccessiveShortestPath<String>(cfGraph, source, sink).getTotalCost() > 100);
+    Assert.assertTrue(new SuccessiveShortestPath<>(cfGraph, source, sink).getTotalCost() > 100);
   }
 }

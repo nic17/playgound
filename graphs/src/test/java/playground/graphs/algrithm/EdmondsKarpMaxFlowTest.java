@@ -14,12 +14,12 @@ import java.util.Random;
 public class EdmondsKarpMaxFlowTest {
 
   private final String v[] = new String[8];
-  private final WeightedDirectedGraphImpl<String> graph = new WeightedDirectedGraphImpl<String>(new DirectedGraphImpl<String>());
+  private final WeightedDirectedGraphImpl<String> graph = new WeightedDirectedGraphImpl<>(new DirectedGraphImpl<String>());
 
   @BeforeClass
   public void init() {
 
-    List<Integer> eightInt = new ArrayList<Integer>();
+    List<Integer> eightInt = new ArrayList<>();
     for (int i = 0; i < 8; i++) {
       eightInt.add(i);
     }
@@ -41,12 +41,12 @@ public class EdmondsKarpMaxFlowTest {
 
   @Test
   public void testGetMaxFlow() throws Exception {
-    Assert.assertEquals(new EdmondsKarpMaxFlow<String>(graph, v[0], v[7]).getMaxFlow(), 7);
+    Assert.assertEquals(new EdmondsKarpMaxFlow<>(graph, v[0], v[7]).getMaxFlow(), 7);
   }
 
   @Test
   public void testGetFlow() throws Exception {
-    EdmondsKarpMaxFlow<String> maxFlow = new EdmondsKarpMaxFlow<String>(graph, v[0], v[7]);
+    EdmondsKarpMaxFlow<String> maxFlow = new EdmondsKarpMaxFlow<>(graph, v[0], v[7]);
 
     Assert.assertEquals(maxFlow.getFlow(v[0], v[1]), 5);
     Assert.assertEquals(maxFlow.getFlow(v[0], v[2]), 2);
@@ -71,7 +71,7 @@ public class EdmondsKarpMaxFlowTest {
   @Test
   public void testBackwardEdge() throws Exception {
     String s = "source", v1 = "v1", v2 = "v2", v3 = "v3", v4 = "v4", v5 = "v5", t = "sink";
-    WeightedDirectedGraphImpl<String> myGraph = new WeightedDirectedGraphImpl<String>(new DirectedGraphImpl<String>());
+    WeightedDirectedGraphImpl<String> myGraph = new WeightedDirectedGraphImpl<>(new DirectedGraphImpl<String>());
     myGraph.addVertex(s);
     myGraph.addVertex(v1);
     myGraph.addVertex(v2);
@@ -86,7 +86,7 @@ public class EdmondsKarpMaxFlowTest {
     myGraph.addEdgeWithWeight(v4, t, 5);
     myGraph.addEdgeWithWeight(v5, t, 7);
 
-    EdmondsKarpMaxFlow<String> maxFlow = new EdmondsKarpMaxFlow<String>(myGraph, s, t);
+    EdmondsKarpMaxFlow<String> maxFlow = new EdmondsKarpMaxFlow<>(myGraph, s, t);
     Assert.assertEquals(maxFlow.getMaxFlow(), 12);
     Assert.assertEquals(maxFlow.getFlow(s, v1), 10);
     Assert.assertEquals(maxFlow.getFlow(s, v2), 1);

@@ -10,8 +10,8 @@ public class SuccessiveShortestPath<V> {
   private int totalCost = 0;
 
   public SuccessiveShortestPath(CostFlowGraph<V> costFlowGraph, V source, V sink) {
-    this.graph = new ResidualCostFlowGraph<V>(costFlowGraph);
-    BellmanFordShortestPath<V> bfShortestPath = new BellmanFordShortestPath(graph, source);
+    this.graph = new ResidualCostFlowGraph<>(costFlowGraph);
+    BellmanFordShortestPath<V> bfShortestPath = new BellmanFordShortestPath<>(graph, source);
     Iterable<V> path = bfShortestPath.getPath(sink);
     while (path.iterator().hasNext()) {
       int m = findMinCapacity(path.iterator());
@@ -24,7 +24,7 @@ public class SuccessiveShortestPath<V> {
 
   private void augmentFlow(Iterator<V> iter, int m) {
     V source = iter.next();
-    V target = null;
+    V target;
     while (iter.hasNext()) {
       target = iter.next();
       graph.increaseFlow(source, target, m);
@@ -37,7 +37,7 @@ public class SuccessiveShortestPath<V> {
   private int findMinCapacity(Iterator<V> iter) {
     int m = Integer.MAX_VALUE;
     V source = iter.next();
-    V target = null;
+    V target;
     while (iter.hasNext()) {
       target = iter.next();
       m = Math.min(m, graph.getCapacity(source, target));

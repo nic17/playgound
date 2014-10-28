@@ -7,7 +7,7 @@ public class CostFlowGraphTest {
 
   @Test
   public void testAddEdgeWithCapacityCost() throws Exception {
-    CostFlowGraphImpl<String> graph = new CostFlowGraphImpl<String>();
+    CostFlowGraphImpl<String> graph = new CostFlowGraphImpl<>();
     String v1 = "v1", v2 = "v2";
     graph.addVertex(v1);
     graph.addVertex(v2);

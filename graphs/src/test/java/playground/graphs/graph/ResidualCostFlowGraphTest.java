@@ -8,18 +8,20 @@ import java.util.Iterator;
 
 public class ResidualCostFlowGraphTest {
 
+  private final String v1 = "v1";
+  private final String v2 = "v2";
+  private final String v3 = "v3";
   private ResidualCostFlowGraph<String> graph;
-  private String v1 = "v1", v2 = "v2", v3 = "v3";
 
   @BeforeMethod
   public void setUp() throws Exception {
-    CostFlowGraphImpl<String> cfGraph = new CostFlowGraphImpl<String>();
+    CostFlowGraphImpl<String> cfGraph = new CostFlowGraphImpl<>();
     cfGraph.addVertex(v1);
     cfGraph.addVertex(v2);
     cfGraph.addVertex(v3);
     cfGraph.addEdgeWithCapacityCost(v1, v2, 10, 2);
     cfGraph.addEdgeWithCapacityCost(v3, v1, 10, 3);
-    graph = new ResidualCostFlowGraph(cfGraph);
+    graph = new ResidualCostFlowGraph<>(cfGraph);
   }
 
   @Test

@@ -8,8 +8,8 @@ public class BellmanFordShortestPath<V> {
 
   private final WeightedDirectedGraph<V> graph;
   private final V source;
-  private final Map<V, Integer> dist = new HashMap<V, Integer>();
-  private final Map<V, V> predecessor = new HashMap<V, V>();
+  private final Map<V, Integer> dist = new HashMap<>();
+  private final Map<V, V> predecessor = new HashMap<>();
 
   public BellmanFordShortestPath(WeightedDirectedGraph<V> weightedGraph, V source) {
     this.graph = weightedGraph;
@@ -62,7 +62,7 @@ public class BellmanFordShortestPath<V> {
   }
 
   public Iterable<V> getPath(V target) {
-    Deque<V> path = new ArrayDeque<V>();
+    Deque<V> path = new ArrayDeque<>();
     if (predecessor.get(target) == null) {
       // no path to target
       return path;

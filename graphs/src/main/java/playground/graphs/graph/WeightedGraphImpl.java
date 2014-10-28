@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class WeightedGraphImpl<V> implements WeightedGraph<V> {
   private final Graph<V> graph;
-  private final Map<V, Map<V, Integer>> outgoingWeight = new HashMap<V, Map<V, Integer>>();
+  private final Map<V, Map<V, Integer>> outgoingWeight = new HashMap<>();
 
   public WeightedGraphImpl(Graph<V> graph) {
     this.graph = graph;
@@ -29,7 +29,7 @@ public class WeightedGraphImpl<V> implements WeightedGraph<V> {
     }
     Map<V, Integer> outgoingWeights = outgoingWeight.get(source);
     if (outgoingWeights == null) {
-      outgoingWeights = new HashMap<V, Integer>();
+      outgoingWeights = new HashMap<>();
       outgoingWeight.put(source, outgoingWeights);
     }
     outgoingWeights.put(target, w);

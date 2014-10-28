@@ -11,16 +11,16 @@ import java.util.*;
 
 public class BellmanFordShortestPathTest {
   private final String v[] = new String[10];
-  private final WeightedDirectedGraph<String> graph = new WeightedDirectedGraphImpl<String>(new DirectedGraphImpl<String>());
+  private final WeightedDirectedGraph<String> graph = new WeightedDirectedGraphImpl<>(new DirectedGraphImpl<String>());
 
   @BeforeClass
   public void init() {
 
-    List<Integer> tenInt = new ArrayList<Integer>();
+    List<Integer> tenInt = new ArrayList<>();
     for (int i = 0; i < 10; i++) {
       tenInt.add(i);
     }
-    List<Integer> anotherTenInt = new ArrayList<Integer>(tenInt);
+    List<Integer> anotherTenInt = new ArrayList<>(tenInt);
     Random random = new Random();
     Collections.shuffle(tenInt, random);
     Collections.shuffle(anotherTenInt, random);
@@ -50,12 +50,12 @@ public class BellmanFordShortestPathTest {
 
   @Test
   public void testGetPathTotalWeights() throws Exception {
-    Assert.assertEquals(new BellmanFordShortestPath(graph, v[0]).getPathTotalWeights(v[9]).intValue(), 9);
+    Assert.assertEquals(new BellmanFordShortestPath<>(graph, v[0]).getPathTotalWeights(v[9]).intValue(), 9);
   }
 
   @Test
   public void testGetPath() throws Exception {
-    Iterator<String> iter = new BellmanFordShortestPath(graph, v[0]).getPath(v[9]).iterator();
+    Iterator<String> iter = new BellmanFordShortestPath<>(graph, v[0]).getPath(v[9]).iterator();
     for (int i = 0; i < 10; i++) {
       Assert.assertEquals(iter.next(), v[i]);
     }
@@ -66,7 +66,7 @@ public class BellmanFordShortestPathTest {
   public void testNoPath() throws Exception {
     String unconnectedVertex = "no path";
     graph.addVertex(unconnectedVertex);
-    BellmanFordShortestPath shortestPath = new BellmanFordShortestPath(graph, v[0]);
+    BellmanFordShortestPath<String> shortestPath = new BellmanFordShortestPath<>(graph, v[0]);
     Assert.assertEquals(shortestPath.getPathTotalWeights(unconnectedVertex).intValue(), Integer.MAX_VALUE);
     Iterator<String> iter = shortestPath.getPath(unconnectedVertex).iterator();
     Assert.assertFalse(iter.hasNext());

@@ -4,8 +4,8 @@ import java.util.*;
 
 @SuppressWarnings("unchecked")
 public class DirectedGraphImpl<V> extends AbstractGraph<V> implements DirectedGraph<V> {
-  private final Map<V, Set<V>> outgoing = new LinkedHashMap<V, Set<V>>();
-  private final Map<V, Set<V>> incoming = new LinkedHashMap<V, Set<V>>();
+  private final Map<V, Set<V>> outgoing = new LinkedHashMap<>();
+  private final Map<V, Set<V>> incoming = new LinkedHashMap<>();
 
   @Override
   public boolean addEdge(V source, V target) {
@@ -14,12 +14,12 @@ public class DirectedGraphImpl<V> extends AbstractGraph<V> implements DirectedGr
     }
     Set<V> outgoingNeighbours = outgoing.get(source);
     if (outgoingNeighbours == null) {
-      outgoingNeighbours = new LinkedHashSet<V>();
+      outgoingNeighbours = new LinkedHashSet<>();
       outgoing.put(source, outgoingNeighbours);
     }
     Set<V> incomingNeighbours = incoming.get(target);
     if (incomingNeighbours == null) {
-      incomingNeighbours = new LinkedHashSet<V>();
+      incomingNeighbours = new LinkedHashSet<>();
       incoming.put(target, incomingNeighbours);
     }
     return outgoingNeighbours.add(target) && incomingNeighbours.add(source);

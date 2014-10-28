@@ -10,8 +10,8 @@ public class BreathFirstIterator<V> implements Iterator<V> {
       new UnsupportedOperationException("remove is not supported in GraphIterator");
 
   private final DirectedGraphImpl<V> graph;
-  private final Queue<V> que = new ArrayDeque<V>();
-  private final Set<V> inQueue = new HashSet<V>();
+  private final Queue<V> que = new ArrayDeque<>();
+  private final Set<V> inQueue = new HashSet<>();
 
   public BreathFirstIterator(DirectedGraphImpl<V> graph, V root) {
     this.graph = graph;

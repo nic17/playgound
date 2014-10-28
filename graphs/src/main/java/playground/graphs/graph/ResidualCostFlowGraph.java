@@ -28,13 +28,13 @@ public class ResidualCostFlowGraph<V> extends ResidualGraph<V> implements CostFl
       for (V v : graph.getOutgoingVertices(u)) {
         Map<V, Integer> subFlows = flows.get(u);
         if (subFlows == null) {
-          subFlows = new HashMap<V, Integer>();
+          subFlows = new HashMap<>();
           flows.put(u, subFlows);
         }
         subFlows.put(v, 0);
         subFlows = flows.get(v);
         if (subFlows == null) {
-          subFlows = new HashMap<V, Integer>();
+          subFlows = new HashMap<>();
           flows.put(v, subFlows);
         }
         subFlows.put(u, 0);
@@ -84,12 +84,7 @@ public class ResidualCostFlowGraph<V> extends ResidualGraph<V> implements CostFl
     if (graph.containsEdge(source, target)) {
       // forward edge
       return graph.getCapacity(source, target) > getFlow(source, target);
-    } else if (graph.containsEdge(target, source)) {
-      // backward edge
-      return getFlow(target, source) > 0;
-    } else {
-      return false;
-    }
+    } else return graph.containsEdge(target, source) && getFlow(target, source) > 0;
   }
 
   @Override
@@ -113,7 +108,7 @@ public class ResidualCostFlowGraph<V> extends ResidualGraph<V> implements CostFl
 
   @Override
   public Iterable<V> getOutgoingVertices(V vertex) {
-    List<V> vList = new ArrayList<V>();
+    List<V> vList = new ArrayList<>();
     // forward edges
     for (V target : graph.getOutgoingVertices(vertex)) {
       if (this.containsEdge(vertex, target)) {
@@ -131,7 +126,7 @@ public class ResidualCostFlowGraph<V> extends ResidualGraph<V> implements CostFl
 
   @Override
   public Iterable<V> getIncomingVertices(V vertex) {
-    List<V> vList = new ArrayList<V>();
+    List<V> vList = new ArrayList<>();
     // forward edges
     for (V source : graph.getIncomingVertices(vertex)) {
       if (this.containsEdge(source, vertex)) {

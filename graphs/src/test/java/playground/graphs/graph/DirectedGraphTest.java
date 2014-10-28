@@ -13,7 +13,7 @@ import static org.testng.Assert.*;
 public class DirectedGraphTest {
 
   private final String vertices[] = new String[10];
-  private final DirectedGraphImpl<String> graph = new DirectedGraphImpl<String>();
+  private final DirectedGraphImpl<String> graph = new DirectedGraphImpl<>();
 
   @BeforeClass
   public void init() {

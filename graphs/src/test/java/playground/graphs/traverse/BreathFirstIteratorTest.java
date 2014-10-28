@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 public class BreathFirstIteratorTest {
   private final String v[] = new String[10];
-  private final DirectedGraphImpl<String> graph = new DirectedGraphImpl<String>();
+  private final DirectedGraphImpl<String> graph = new DirectedGraphImpl<>();
 
   @BeforeClass
   public void init() {
@@ -41,13 +41,13 @@ public class BreathFirstIteratorTest {
 
   @Test
   public void testHasNext() throws Exception {
-    Iterator<String> iter = new BreathFirstIterator<String>(graph, v[0]);
+    Iterator<String> iter = new BreathFirstIterator<>(graph, v[0]);
     Assert.assertTrue(iter.hasNext());
   }
 
   @Test
   public void testNext() throws Exception {
-    Iterator<String> iter = new BreathFirstIterator<String>(graph, v[0]);
+    Iterator<String> iter = new BreathFirstIterator<>(graph, v[0]);
     for (int i = 0; i < 10; i++) {
       Assert.assertEquals(iter.next(), v[i]);
     }

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class ResidualGraph<V> implements WeightedDirectedGraph<V> {
-  protected final Map<V, Map<V, Integer>> flows = new HashMap<V, Map<V, Integer>>();
+  protected final Map<V, Map<V, Integer>> flows = new HashMap<>();
 
   protected abstract void initializeFlows();
 
